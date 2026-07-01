@@ -1,0 +1,568 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Product Manager Case Study - WSC Sports</title>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+    --bg-light: #0A0A0A;
+    --bg-secondary: #141414;
+    --card-bg: #1E1E1E;
+    --border: #2A2A2A;
+    --primary: #00E5FF;
+    --primary-hover: #00B3CC;
+    --primary-glow: rgba(0, 229, 255, 0.4);
+    --text-main: #FFFFFF;
+    --text-muted: #A0A0A0;
+    --success: #10B981;
+    --success-bg: #D1FAE5;
+    --font-heading: 'Inter, sans-serif', sans-serif;
+    --font-body: 'Inter', sans-serif;
+}
+
+body {
+    margin: 0;
+    font-family: var(--font-body);
+    background-color: var(--bg-secondary);
+    color: var(--text-main);
+    overflow-x: hidden;
+    line-height: 1.6;
+}
+
+.background-decor {
+    position: absolute;
+    border-radius: 50%;
+    filter: blur(140px);
+    z-index: -1;
+    opacity: 0.08;
+}
+.blur-1 {
+    width: 400px;
+    height: 400px;
+    background: var(--primary);
+    top: -50px;
+    right: -50px;
+}
+.blur-2 {
+    width: 350px;
+    height: 350px;
+    background: #06B6D4;
+    bottom: -100px;
+    left: -100px;
+}
+
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 20px;
+}
+
+.navbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 15px 40px;
+    background: var(--bg-light);
+    border-bottom: 1px solid var(--border);
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.05);
+}
+
+.logo {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-size: 1.25rem;
+    font-weight: 800;
+    letter-spacing: -0.5px;
+    font-family: var(--font-heading);
+}
+
+.logo-brand {
+    color: var(--primary);
+}
+
+.btn {
+    display: inline-block;
+    padding: 10px 24px;
+    border-radius: 9999px;
+    font-weight: 600;
+    text-decoration: none;
+    transition: all 0.2s ease;
+    cursor: pointer;
+    border: none;
+    font-family: var(--font-heading);
+}
+
+.btn.primary {
+    background: var(--primary);
+    color: white;
+    box-shadow: 0 4px 14px var(--primary-glow);
+}
+
+.btn.primary:hover {
+    background: var(--primary-hover);
+    transform: translateY(-1px);
+    box-shadow: 0 6px 20px rgba(254, 94, 0, 0.3);
+}
+
+.btn.large {
+    padding: 14px 36px;
+    font-size: 1.1rem;
+}
+
+.intro-card {
+    background: var(--card-bg);
+    border: 1px solid var(--border);
+    border-radius: 16px;
+    padding: 40px;
+    margin-top: 30px;
+    margin-bottom: 30px;
+    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05), 0 2px 4px -1px rgba(0, 0, 0, 0.02);
+}
+
+h1 {
+    font-size: 2.5rem;
+    font-weight: 800;
+    margin-bottom: 12px;
+    color: var(--text-main);
+    font-family: var(--font-heading);
+    letter-spacing: -0.5px;
+}
+
+.subtitle {
+    font-size: 1.1rem;
+    color: var(--text-muted);
+    margin-bottom: 30px;
+    max-width: 800px;
+}
+
+.quick-links {
+    display: flex;
+    gap: 20px;
+}
+
+.quick-link {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    background: var(--bg-secondary);
+    border: 1px solid var(--border);
+    padding: 16px 28px;
+    border-radius: 12px;
+    text-decoration: none;
+    color: var(--text-main);
+    transition: all 0.2s ease;
+    flex: 1;
+}
+
+.quick-link:hover {
+    background: var(--bg-light);
+    border-color: var(--primary);
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+}
+
+.quick-link .icon {
+    font-size: 2rem;
+}
+
+.quick-link div {
+    display: flex;
+    flex-direction: column;
+}
+
+.quick-link strong {
+    font-size: 1rem;
+    font-weight: 700;
+    color: var(--text-main);
+}
+
+.quick-link span {
+    font-size: 0.85rem;
+    color: var(--text-muted);
+}
+
+.tabs-header {
+    display: flex;
+    gap: 10px;
+    border-bottom: 2px solid var(--border);
+    margin-bottom: 25px;
+}
+
+.tab-btn {
+    background: none;
+    border: none;
+    color: var(--text-muted);
+    padding: 15px 25px;
+    font-size: 1rem;
+    font-weight: 600;
+    font-family: var(--font-heading);
+    cursor: pointer;
+    transition: all 0.2s ease;
+    position: relative;
+}
+
+.tab-btn:hover {
+    color: var(--primary);
+}
+
+.tab-btn.active {
+    color: var(--primary);
+}
+
+.tab-btn.active::after {
+    content: '';
+    position: absolute;
+    bottom: -2px;
+    left: 0;
+    right: 0;
+    height: 2px;
+    background-color: var(--primary);
+}
+
+.tab-content {
+    background: var(--card-bg);
+    border: 1px solid var(--border);
+    border-radius: 16px;
+    padding: 40px;
+    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05);
+    margin-bottom: 50px;
+}
+
+.tab-content.hidden {
+    display: none;
+}
+
+.content-body {
+    max-width: 900px;
+    margin: 0 auto;
+}
+
+.content-body h1, .content-body h2, .content-body h3 {
+    font-family: var(--font-heading);
+    color: var(--text-main);
+    margin-top: 30px;
+    letter-spacing: -0.3px;
+}
+
+.content-body h1 { font-size: 2rem; border-bottom: 1px solid var(--border); padding-bottom: 10px; }
+.content-body h2 { font-size: 1.5rem; margin-top: 40px; }
+.content-body h3 { font-size: 1.2rem; }
+
+.content-body p, .content-body li {
+    font-size: 1rem;
+    color: var(--text-main);
+    line-height: 1.7;
+}
+
+.content-body ul, .content-body ol {
+    padding-left: 20px;
+    margin-bottom: 20px;
+}
+
+.content-body li {
+    margin-bottom: 8px;
+}
+
+.content-body blockquote {
+    border-left: 4px solid var(--primary);
+    background: var(--bg-secondary);
+    padding: 15px 20px;
+    margin: 20px 0;
+    border-radius: 0 8px 8px 0;
+    font-style: italic;
+}
+
+.content-body table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 30px 0;
+}
+
+.content-body th, .content-body td {
+    padding: 12px 15px;
+    text-align: left;
+    border-bottom: 1px solid var(--border);
+}
+
+.content-body th {
+    background-color: var(--bg-secondary);
+    font-weight: 700;
+}
+
+.content-body pre {
+    background-color: var(--bg-secondary);
+    padding: 15px;
+    border-radius: 8px;
+    overflow-x: auto;
+    border: 1px solid var(--border);
+}
+
+.content-body code {
+    background-color: var(--bg-secondary);
+    padding: 2px 6px;
+    border-radius: 4px;
+    font-family: monospace;
+    font-size: 0.9em;
+}
+
+    </style>
+</head>
+<body>
+    <div class="background-decor blur-1"></div>
+    <div class="background-decor blur-2"></div>
+    
+    <header class="navbar">
+        <div class="logo">
+            <img src="https://logo.clearbit.com/wsc-sports.com" alt="WSC Sports Logo" style="height: 32px; width: auto; object-fit: contain; border-radius: 4px; display: inline-block;" onerror="if(!this.getAttribute('data-tried-fallback')){this.setAttribute('data-tried-fallback','true');this.src='https://www.google.com/s2/favicons?sz=128&domain=wsc-sports.com';}else{this.style.display='none';}">
+            <span class="logo-brand">wsc sports</span> | PM Portfolio Application
+        </div>
+        <div class="actions">
+            <a href="https://stitch.withgoogle.com/projects/5974137843442307632" target="_blank" class="btn primary">View Stitch Prototypes</a>
+        </div>
+    </header>
+    
+    <main class="container">
+        <section class="intro-card">
+            <h1>Product Management Strategy & Artifacts</h1>
+            <p class="subtitle">Prepared for the Product Manager role at WSC Sports. Complete with Grounded Deep Research, product ideation, detailed PRD, and design layouts.</p>
+            
+            <div class="quick-links">
+                <a href="https://stitch.withgoogle.com/projects/5974137843442307632" target="_blank" class="quick-link">
+                    <span class="icon">🎨</span>
+                    <div>
+                        <strong>Stitch Workspace</strong>
+                        <span>Review screen mockups and design system rules</span>
+                    </div>
+                </a>
+            </div>
+        </section>
+        
+        <div class="tabs-header">
+            <button class="tab-btn active" onclick="switchTab('deep_research')">1. Deep Research Report</button>
+            <button class="tab-btn" onclick="switchTab('prd')">2. Product Requirement Document (PRD)</button>
+            <button class="tab-btn" onclick="switchTab('design')">3. Design Guidelines</button>
+        </div>
+        
+        <section class="tab-content" id="deep_research">
+            <div class="content-body">
+                <h3>1. Executive Summary & Value Proposition</h3>
+
+<p><strong>WSC Sports</strong> is a pioneering B2B sports technology company that utilizes artificial intelligence and machine learning to automate the creation, management, distribution, and monetization of sports video content [1-3]. Serving over 650 global sports organizations—including Tier-1 leagues like the NBA, LaLiga, and the NHL, as well as major broadcasters like ESPN and YouTube TV [3-5]—the company processes hundreds of thousands of live broadcasts to generate real-time, short-form video highlights.</p>
+
+<ul>
+<li><strong>Core Mission:</strong> WSC Sports’ mission is to "empower sports media rights holders to create and distribute automated, personalized sports video content at scale to engage fans and maximize the value of their media assets". </li>
+<li><strong>Unique Value Proposition:</strong> The platform's true value lies in its <strong>Real-Time AI Automation and Hyper-Personalization at Scale</strong>. By analyzing live video feeds using contextual audio-visual cues and data tracking, WSC reduces manual video editing time from 10–20 minutes down to under 30 seconds. It enables the "Create Once, Publish Everywhere" model, autonomously adapting clips into varied aspect ratios (16:9, 9:16, 1:1) and distributing them across apps, OTT platforms, and social media. This allows media rights holders to maximize their content output by over 10x without adding headcount, driving new advertising inventory and direct-to-consumer (DTC) revenue streams.</li>
+</ul>
+<h3>2. Target Users & Detailed Personas</h3>
+
+<p>WSC Sports operates on a B2B SaaS model, targeting major professional leagues, broadcasters, and the fast-growing sports betting and fantasy sectors. While the direct buyers are corporate entities, the end-user demographics consuming the content are predominantly 18-34-year-old males, though female viewership is experiencing rapid growth (with a 40% year-over-year increase in automated content production for women's sports). </p>
+
+<p><strong>Key User Persona 1: The Enterprise Rights-Holder / Media Executive</strong></p>
+<ul>
+<li><strong>Profile:</strong> A VP of Digital or Chief Marketing Officer at a major sports league (e.g., NBA, LALIGA) or global broadcasting network. </li>
+<li><strong>Motivations:</strong> They are battling cord-cutting and subscription fatigue, needing to justify expensive broadcast rights by maximizing fan engagement and generating new digital ad inventory.</li>
+<li><strong>Pain Points:</strong> Traditional manual video editing cannot scale to meet the demand for localized, multi-format content. They need a solution that integrates securely with their cloud infrastructure to syndicate content securely and quickly.</li>
+<li><strong>Use Case:</strong> Utilizing WSC's automated engine to instantly distribute localized packages to international partners and generate tailored video for individual fan segments, driving App sessions and converting attention into direct merchandise/ticket sales.</li>
+</ul>
+<p><strong>Key User Persona 2: The Digital Content / Social Media Manager</strong></p>
+<ul>
+<li><strong>Profile:</strong> An agile digital marketer or content creator working for a sports team or mid-tier sports property.</li>
+<li><strong>Motivations:</strong> They must feed the relentless demand for short-form, mobile-first content (TikTok, Instagram Reels) to engage Gen Z fans who prefer bite-sized moments over full matches.</li>
+<li><strong>Pain Points:</strong> They suffer from "content overload" and bottlenecked workflows, previously spending hours manually scrubbing footage to find a specific player's highlights or resizing videos for different platforms. </li>
+<li><strong>Use Case:</strong> Relying on WSC's "In-App Stories" and rule-based triggers to automatically fetch pre-cropped, 9:16 vertical videos of star players, complete with dynamic Calls to Action (CTAs), to publish within seconds of a play [26-28].</li>
+</ul>
+<h3>3. User Reviews & Synthesized Pain Points</h3>
+
+<p>Based on extensive market use and client outcomes, user feedback highlights incredible strengths but also points to specific technical and commercial friction points.</p>
+
+<p><strong>Major Strengths & Positive Feedback:</strong></p>
+<ul>
+<li><strong>Massive Efficiency Gains:</strong> Clients consistently praise the speed and scale of the platform. For example, the Cleveland Cavaliers saw app downloads increase by 83% after utilizing WSC for personalized highlights. The NBA uses the tool to generate over 67,000 playoff highlights, while NASCAR reduced highlight turnaround time by 80%.</li>
+<li><strong>Reliability:</strong> The platform offers exceptional stability with 99.9% uptime during high-traffic global events, securing a 95%+ client retention rate. </li>
+</ul>
+<p><strong>Synthesized Pain Points & Feature Gaps:</strong></p>
+<ul>
+<li><strong>Opaque & Enterprise-Heavy Pricing:</strong> WSC Sports operates on custom-quoted, multi-year enterprise contracts often in the seven-figure range. Small to mid-market clubs and standalone developers complain that the pricing and lock-in are prohibitive compared to alternatives offering transparent, pay-as-you-go API credit systems.</li>
+<li><strong>Rigid Vertical Focus:</strong> Competitor analyses note that WSC is strictly optimized for sports workflows. Users looking to process hybrid media, corporate events, or entertainment content find the platform lacks the flexibility needed outside its core sports vertical.</li>
+<li><strong>AI Hallucinations in Automated Commentary:</strong> As WSC has rolled out Large Language Model (LLM) based commentary, users (such as NLP engineers) report challenges with AI hallucinations (e.g., mislabeling a veteran as a "rookie" based on outdated training data) and logical errors (e.g., claiming a team is "still leading" in the first minute of a game). Overcoming this requires highly structured metadata and complex Chain of Thought (CoT) prompting [38-40].</li>
+<li><strong>Customization Clarity:</strong> Some users find a lack of clarity around the ability to customize AI tagging models to match highly specific organizational brand structures, especially when compared to newer, flexible AI platforms.</li>
+</ul>
+<h3>4. Key Markets & Competitor Landscaping</h3>
+
+<p>WSC Sports holds an estimated 75-80% market share in the premium automated sports highlight tier. However, the democratization of AI video models has lowered barriers to entry, empowering a wave of new competitors.</p>
+
+<p>| Feature/Metric | WSC Sports | Magnifi (VideoVerse) | BlendVision AI | VIDIO (VibeEdit) |</p>
+<p>|:--- |:--- |:--- |:--- |:--- |</p>
+<p>| <strong>Target Market</strong> | Tier-1 Enterprise (NBA, ESPN, LaLiga) | Mid-market, Emerging Markets, Collegiate | Enterprise, Corporate, Hybrid Events | Developers, Mid-tier creators |</p>
+<p>| <strong>Pricing Model</strong> | Custom enterprise quotes, multi-year SaaS, Rev-Share | Undisclosed/Custom, targeted at cost-conscious buyers | Scalable SaaS | Pay-as-you-go, Credit bundles (e.g. ~$0.09/min) |</p>
+<p>| <strong>Core Strengths</strong> | Deep integrations, 99% accuracy, proven reliability at massive scale, newly unified "Arena" CMS. | AI auto-resizing, meta-tagging, competitive pricing for smaller leagues. | Highly customizable tagging models, versatile across non-sports content. | API-first architecture, highly transparent pricing, easy developer SDKs. |</p>
+<p>| <strong>Key Weaknesses</strong> | Highly restrictive to sports content; expensive for small organizations. | Limited flexibility outside sports; lower top-tier brand presence. | Weaker brand recognition in top-tier live sports broadcasting. | Lacks built-in GUI dashboards/CMS; developers must build the frontend. |</p>
+
+<h3>5. Existing Design & Platform Analysis</h3>
+
+<p>WSC Sports has transitioned from offering fragmented, standalone products (AVGen, Clipro, Graphics Engine) to a highly centralized, streamlined ecosystem.</p>
+
+<ul>
+<li><strong>The "Arena" Platform:</strong> Launched to provide a singular home for content operations, <strong>Arena</strong> houses distinct workflows: <em>Create</em> (on-demand highlight generation), <em>Rules</em> (trigger-based automated clipping), <em>Library</em> (indexed asset management), and a <em>Partner Portal</em> for commercial collaboration [56-58].</li>
+<li><strong>Design & Content Formatting:</strong> The platform is heavily geared toward the "TikTok-ification" of sports, natively outputting <strong>In-App Stories</strong> (9:16 vertical UIs) and <strong>Moments</strong> (endless scrolling interfaces). The aesthetic priority is mobile-first, integrating localized graphics, visual tracking overlays, and interactive Calls to Action (CTAs) that link out to ticketing and merchandise.</li>
+<li><strong>Technical Infrastructure:</strong> WSC utilizes a highly scalable, cloud-agnostic backend utilizing over 700 microservices deployed across AWS, Azure, and GCP. The architecture relies on Kubernetes, Infrastructure as Code (Terraform) for spinning up ingest servers on demand, and seamless handling of varied streaming protocols (RTMP, SRT, HLS) [60-62]. They integrate seamlessly with marketing tech stacks, such as Braze, to orchestrate personalized push notifications containing multimedia [63-66].</li>
+</ul>
+<h3>6. Emerging Technology & Strategic Opportunities</h3>
+
+<p>To defend its dominant market position and double growth by 2026, WSC Sports must leverage emerging tech stacks to capture value beyond legacy B2B highlight creation. </p>
+
+<ul>
+<li><strong>Pioneering the "Large Sport Model" (LSM) & GenAI Commentary:</strong> WSC has recently launched a dedicated GenAI division built around its proprietary Large Sport Model (LSM). Strategically, WSC can scale this by utilizing advanced text-to-speech models to dynamically generate context-aware, emotional, and multi-lingual commentary. Pilots with the NBA (generating highlights in French, Portuguese, and Spanish) are already seeing 75% viewer completion rates.</li>
+<li><strong>Animated Altcasts for Gen-Alpha:</strong> By fusing their deep metadata and player tracking coordinates with real-time 3D rendering engines, WSC is powering animated, kid-friendly "altcasts" (such as LALIGA's GOALITOS series). Expanding this via APIs into virtual reality (VR) or Roblox/Fortnite ecosystems represents a massive opportunity to capture Gen-Alpha fans.</li>
+<li><strong>"WSC For Creators" & The Creator Economy:</strong> Launching mid-market subscription layers for individual athletes and influencers allows WSC to tap into the booming creator economy. Offering lightweight web SDKs or local database access to individual athletes allows them to instantly access their own plays, driving grassroots adoption and a revenue-sharing model outside of massive league deals.</li>
+<li><strong>Sports Betting Integration & Micro-Markets:</strong> As the AI-in-sports betting sector projects to surpass $60B by 2034, WSC's low-latency video generation is an ideal fit for live betting platforms. By providing highly specific, sub-30-second clips of events to sportsbooks, they can power "micro-betting" interfaces (e.g., betting on the next play) backed by real-time visual proof. </li>
+<li><strong>Zero-Party Data & Fan Identity Graphs:</strong> Through the high performance of their In-App Stories' CTAs (12.3% CTR), WSC can prompt users with native polls and interactive tools to gather "zero-party" data (direct preferences). Fusing this with viewing habits enables WSC to offer clubs automated "Fan Identity Graphs"—predictive AI models that trigger hyper-targeted merchandise or ticket promotions exactly when fan sentiment is peaking [79-81].</li>
+</ul>
+            </div>
+        </section>
+        
+        <section class="tab-content hidden" id="prd">
+            <div class="content-body">
+                <h3>1. Feature Brainstorming</h3>
+
+<p>Based on the Deep Research Report and the provided sources, here are 3 innovative features that directly address major user complaints and leverage emerging technologies:</p>
+
+<ul>
+<li><strong>Feature 1: "WSC Creator Connect" (Mid-Market Self-Serve Portal & API)</strong></li>
+<ul>
+<li><em>Addresses Pain Point:</em> Opaque & Enterprise-Heavy Pricing. Users complain that WSC's seven-figure, custom-quoted contracts lock out small to mid-market clubs and standalone developers. </li>
+<li><em>Emerging Tech Leveraged:</em> "WSC For Creators" / Creator Economy. By offering lightweight web SDKs and a transparent, pay-as-you-go credit system, individual athletes and influencers can directly access and clip their own plays.</li>
+</ul>
+<li><strong>Feature 2: "Arena Guardian: CoT Verification Engine"</strong></li>
+<ul>
+<li><em>Addresses Pain Point:</em> AI Hallucinations in Automated Commentary. NLP engineers report that WSC's Large Language Models (LLMs) sometimes hallucinate (e.g., mislabeling veterans as rookies or misunderstanding game logic).</li>
+<li><em>Emerging Tech Leveraged:</em> Large Sport Model (LSM) & Chain of Thought (CoT). A specialized verification dashboard within the Arena CMS that uses CoT prompting to break down play-by-play verification steps, checking generated scripts against structured metadata to eliminate logical errors in multilingual commentary.</li>
+</ul>
+<li><strong>Feature 3: "Zero-Party Fan Identity Graph Integration"</strong></li>
+<ul>
+<li><em>Addresses Pain Point:</em> Customization Clarity. Organizations struggle to adapt AI models to match their highly specific brand structures and fan demographics.</li>
+<li><em>Emerging Tech Leveraged:</em> Zero-Party Data & Fan Identity Graphs. Embeds interactive polls, trivia, and dynamic Calls to Action (CTAs) directly into WSC's 9:16 "In-App Stories" and "Moments". The system gathers direct fan preferences (zero-party data) to automatically trigger hyper-targeted merchandise/ticket promotions when fan sentiment peaks [3, 9-11].</li>
+</ul>
+</ul>
+<hr>
+
+<h3>2. Feature Selection & Business Rationale</h3>
+
+<p><strong>Selected Feature: "WSC Creator Connect" (Mid-Market Self-Serve Portal & API)</strong></p>
+
+<p><strong>Assumptions & Product Logic:</strong></p>
+<p>We assume that the democratization of AI video tools has permanently lowered the barrier to entry, empowering competitors like VIDIO (VibeEdit) to capture the mid-market using transparent, pay-as-you-go credit systems (e.g., ~$0.09/min). The logic is to pivot from a strictly Tier-1 Enterprise model to an inclusive, tiered SaaS and usage-based platform. This product will provide a self-serve dashboard and lightweight web SDKs where users can purchase credits to access WSC's automated clipping tools. </p>
+
+<p><strong>Customer Incentives:</strong></p>
+<p>Athletes, influencers, and mid-tier teams are incentivized by the removal of prohibitive multi-year lock-ins. They gain the ability to instantly pull their own pre-cropped, 9:16 vertical highlights to feed their TikTok and Instagram channels, monetizing their personal brands without needing massive production budgets.</p>
+
+<p><strong>Business Case:</strong></p>
+<p>Launching "WSC Creator Connect" defends our estimated 75-80% market share against low-cost entrants while unlocking a massive new Total Addressable Market (TAM). By introducing a mid-market subscription layer, we capture the booming creator economy, accelerate customer acquisition among regional sports properties, and establish a new revenue-sharing model outside of massive league deals. </p>
+
+<hr>
+
+<h3>3. Product Requirement Document (PRD): WSC Creator Connect</h3>
+
+<h4><strong>Document Version & Owner Info</strong></h4>
+<ul>
+<li><strong>Product Name:</strong> WSC Creator Connect</li>
+<li><strong>Document Version:</strong> 1.0</li>
+<li><strong>Owner:</strong> Senior Product Manager</li>
+<li><strong>Date:</strong> July 1, 2026</li>
+</ul>
+<h4><strong>Objective & Vision</strong></h4>
+<ul>
+<li><strong>Objective:</strong> To launch a self-serve, usage-based subscription and API portal that democratizes WSC Sports’ AI highlight generation for mid-market leagues, individual athletes, and independent content creators.</li>
+<li><strong>Vision:</strong> To evolve WSC Sports from an exclusive Tier-1 enterprise tool into the universal infrastructure for the sports creator economy, empowering any athlete or creator to instantly access, personalize, and monetize their moments.</li>
+</ul>
+<h4><strong>Target Audience</strong></h4>
+<ol>
+<li><strong>The Digital Content / Social Media Manager (Mid-Market):</strong> Marketers for mid-tier properties who suffer from content overload and cannot afford WSC's traditional 7-figure custom quotes.</li>
+<li><strong>The Individual Athlete / Influencer:</strong> Independent creators who need immediate access to their own plays in mobile-first formats (9:16) to grow their personal social media channels and tap into the creator economy.</li>
+</ol>
+<h4><strong>User Stories</strong></h4>
+<ol>
+<li><strong>As an individual athlete,</strong> I want to use a lightweight web SDK to instantly access my personal highlights so I can post them to my social channels seconds after a play.</li>
+<li><strong>As a mid-market content manager,</strong> I want to purchase highlight generation credits on a pay-as-you-go basis so I am not locked into a prohibitive, multi-year enterprise contract.</li>
+<li><strong>As a social media influencer,</strong> I want the platform to automatically output my clips in vertical 9:16 format so I can upload them natively as "In-App Stories" or "Moments" without manual resizing.</li>
+<li><strong>As an independent creator,</strong> I want transparent pricing displayed directly on the dashboard so I know exactly what I am paying per minute of generated video.</li>
+<li><strong>As a digital marketer,</strong> I want to embed dynamic Calls to Action (CTAs) into my clips linking to my personal merchandise store, so I can generate direct-to-consumer revenue.</li>
+</ol>
+<h4><strong>Functional Requirements & Specs</strong></h4>
+<ul>
+<li><strong>Self-Serve Onboarding & Billing:</strong> </li>
+<ul>
+<li>Implement an automated sign-up flow with Stripe/billing integration.</li>
+<li>Create a transparent pricing tier UI (e.g., pay-as-you-go credit bundles or monthly SaaS tiers) to directly counter competitors like VIDIO.</li>
+</ul>
+<li><strong>Lightweight Web SDKs & APIs:</strong></li>
+<ul>
+<li>Provide developer documentation, API keys, and SDKs (Node.js, Python, etc.) allowing creators to fetch structured metadata and video clips based on player ID or event type.</li>
+</ul>
+<li><strong>Automated Format Generation:</strong></li>
+<ul>
+<li>The engine must autonomously adapt selected clips into 16:9, 9:16, and 1:1 aspect ratios within the dashboard, prioritizing mobile-first consumption.</li>
+</ul>
+<li><strong>Asset Management Dashboard (Mini-Arena):</strong></li>
+<ul>
+<li>A stripped-down version of the "Arena" CMS where users can search their generated <em>Create</em> highlights, manage their <em>Library</em>, and trigger rule-based clipping for specific athletes.</li>
+</ul>
+</ul>
+<h4><strong>Non-Functional Requirements</strong></h4>
+<ul>
+<li><strong>Performance:</strong> The AI pipeline must maintain the WSC standard of reducing manual editing time from 15+ minutes down to under 30 seconds for clip delivery.</li>
+<li><strong>Scaling:</strong> The backend infrastructure must reliably support a high volume of concurrent micro-transactions and API calls. Must leverage the existing 700 microservices deployed across AWS, Azure, and GCP via Kubernetes to ensure elastic scaling.</li>
+<li><strong>Security:</strong> Strict rights-management protocols must be enforced. Creators can only access footage for which they have verified intellectual property or league-approved access rights to prevent unauthorized syndication.</li>
+</ul>
+<h4><strong>Success Metrics (KPIs)</strong></h4>
+<ul>
+<li><strong>North Star Metric:</strong> Total Creator ARPU (Average Revenue Per User) Growth & Number of Active Creator Accounts.</li>
+<li><strong>KPI 1 (Adoption):</strong> Sign-up conversion rate for the mid-market and creator tiers.</li>
+<li><strong>KPI 2 (Engagement):</strong> Volume of 9:16 clips generated and distributed via the Creator Connect APIs/SDKs per month.</li>
+<li><strong>KPI 3 (Retention):</strong> Churn rate of mid-market subscription accounts compared to enterprise contracts. </li>
+</ul>
+<h4><strong>Release Plan & Phases</strong></h4>
+<ul>
+<li><strong>Phase 1: MVP (Months 1-3)</strong></li>
+<ul>
+<li>Launch the self-serve web portal with credit-based billing functionality.</li>
+<li>Release basic Player-Tracking highlight extraction strictly in 9:16 and 16:9 formats.</li>
+<li>Beta test with a curated group of 50 individual athletes and 10 mid-tier collegiate/regional leagues.</li>
+</ul>
+<li><strong>Phase 2: Expansion & Ecosystem (Months 4-6)</strong></li>
+<ul>
+<li>Roll out full public API access and lightweight Web SDKs for developers.</li>
+<li>Integrate the "Discovery Network" ad-revenue split model, allowing WSC to share programmatic ad revenue with individual creators on generated clips.</li>
+<li>Introduce "Zero-Party Data" CTAs within the Creator platform, allowing influencers to insert merchandise/polling links directly into their videos.</li>
+</ul>
+</ul>
+            </div>
+        </section>
+        
+        <section class="tab-content hidden" id="design">
+            <div class="content-body">
+                <h2>Design System Strategy & Prototypes</h2>
+                <p>An interactive high-fidelity mockup has been generated within Stitch based on the product requirements. You can review the structure of the layout, responsive constraints, and colors using the workspace link below:</p>
+                <div style="text-align: center; margin: 40px 0;">
+                    <a href="https://stitch.withgoogle.com/projects/5974137843442307632" target="_blank" class="btn large primary">Open Stitch Interactive Editor</a>
+                </div>
+            </div>
+        </section>
+    </main>
+    
+    <script>
+        function switchTab(tabId) {
+            document.querySelectorAll('.tab-content').forEach(el => el.classList.add('hidden'));
+            document.querySelectorAll('.tab-btn').forEach(el => el.classList.remove('active'));
+            document.getElementById(tabId).classList.remove('hidden');
+            event.currentTarget.classList.add('active');
+        }
+    </script>
+</body>
+</html>
